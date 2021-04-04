@@ -19,18 +19,18 @@ func Parse(def string) (count, sides int, err error) {
 	}
 
 	// parse dice count
-	s1 := def[:idx]
-	if empty(s1) {
+	seg := def[:idx]
+	if empty(seg) {
 		count = 1
 	} else {
-		if count, err = strconv.Atoi(s1); err != nil {
+		if count, err = strconv.Atoi(seg); err != nil {
 			return
 		}
 	}
 
 	// parse dice sides
-	s2 := def[idx+1:]
-	if empty(s2) {
+	seg = def[idx+1:]
+	if empty(seg) {
 		err = errors.New("missing side count")
 		return
 	}
