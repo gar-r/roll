@@ -4,17 +4,6 @@ import "testing"
 
 func Test_Dice_Parse(t *testing.T) {
 
-	// invalid dice defs: should return error when parsed
-	invalid := []struct{ def, desc string }{
-		{"", "empty string"},
-	}
-
-	for _, test := range invalid {
-		t.Run(test.desc, func(t *testing.T) {
-			assertError(t, test.def)
-		})
-	}
-
 	// valid dice defs
 	defs := []struct {
 		def          string
@@ -29,8 +18,23 @@ func Test_Dice_Parse(t *testing.T) {
 		{"d20", 1, 20},
 		{"d100", 1, 100},
 
-		// dice count
-		{ "1d6", 1, 6 },
+		// single die, with count specified
+		{"1d4", 1, 4},
+		{"1d6", 1, 6},
+		{"1d8", 1, 8},
+		{"1d10", 1, 10},
+		{"1d12", 1, 12},
+		{"1d20", 1, 20},
+		{"1d100", 1, 100},
+
+		// multiple dice
+		{"2d4", 2, 4},
+		{"3d6", 3, 6},
+		{"4d8", 4, 8},
+		{"5d10", 5, 10},
+		{"6d12", 6, 12},
+		{"7d20", 7, 20},
+		{"8d100", 8, 100},
 	}
 
 	for _, test := range defs {
@@ -39,26 +43,37 @@ func Test_Dice_Parse(t *testing.T) {
 		})
 	}
 
+	// invalid dice defs: should return error when parsed
+	invalid := []string{
+		"", "1d", "1dx", "xd4",	// non-numbers
+		"foo", 					// no "d"
+		"2d3", "3d7", "4d11",	// no such die
+	}
+
+	for _, test := range invalid {
+		t.Run(test, func(t *testing.T) {
+			assertError(t, test)
+		})
+	}
+
 }
 
 func assertError(t *testing.T, def string) {
 	t.Helper()
-	_, err := Parse(def)
+	c, s, err := Parse(def)
 	if err == nil {
-		t.Error("expected error, got none")
+		t.Errorf("expected error, got (%d, %d)", c, s)
 	}
 }
 
 func assertDice(t *testing.T, def string, count, sides int) {
 	t.Helper()
-	d, err := Parse(def)
+	c, s, err := Parse(def)
 	if err != nil {
 		t.Error(err)
-	} else if d == nil {
-		t.Error("nil dice")
-	} else if count != d.count {
-		t.Errorf("expected count: %d, got %d", count, d.count)
-	} else if sides != d.sides {
-		t.Errorf("expected sides: %d, got %d", sides, d.sides)
+	} else if count != c {
+		t.Errorf("expected count: %d, got %d", count, c)
+	} else if sides != s {
+		t.Errorf("expected sides: %d, got %d", sides, s)
 	}
 }
