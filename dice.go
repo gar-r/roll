@@ -35,6 +35,9 @@ func Parse(def string) (count, sides int, err error) {
 		return
 	}
 	sides, err = strconv.Atoi(def[idx+1:])
+	if sides % 2 != 0 {
+		err = errors.New("invalid die def: " + def)
+	}
 	return
 }
 
