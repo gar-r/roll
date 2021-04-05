@@ -1,6 +1,9 @@
 package main
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 func Test_Dice_Parse(t *testing.T) {
 
@@ -52,7 +55,7 @@ func Test_Dice_Parse(t *testing.T) {
 	}
 
 	for _, test := range invalid {
-		t.Run(test, func(t *testing.T) {
+		t.Run(fmt.Sprintf("def '%s'", test), func(t *testing.T) {
 			assertError(t, test)
 		})
 	}

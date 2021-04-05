@@ -2,45 +2,25 @@ package main
 
 import (
 	"errors"
+	"regexp"
 	"strconv"
-	"strings"
 )
 
+var diceRe = regexp.MustCompile(`^(\d*)d(100|20|12|10|8|6|4)$`)
+
 func Parse(def string) (count, sides int, err error) {
-	if empty(def) {
-		err = errors.New("empty dice def")
+	match := diceRe.FindStringSubmatch(def)
+	if match == nil || len(match) == 0 {
+		err = errors.New("invalid def: " + def)
 		return
 	}
-
-	idx := strings.Index(def, "d")
-	if idx < 0 {
-		err = errors.New("missing 'd' separator")
-		return
-	}
-
-	// parse dice count
-	seg := def[:idx]
-	if empty(seg) {
+	if match[1] == "" {
 		count = 1
 	} else {
-		if count, err = strconv.Atoi(seg); err != nil {
+		if count, err = strconv.Atoi(match[1]); err != nil {
 			return
 		}
 	}
-
-	// parse dice sides
-	seg = def[idx+1:]
-	if empty(seg) {
-		err = errors.New("missing side count")
-		return
-	}
-	sides, err = strconv.Atoi(def[idx+1:])
-	if sides % 2 != 0 || (sides > 12 && !(sides == 20 || sides == 100)) {
-		err = errors.New("invalid die def: " + def)
-	}
+	sides, err = strconv.Atoi(match[2])
 	return
-}
-
-func empty(def string) bool {
-	return "" == def
 }
