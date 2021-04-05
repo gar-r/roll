@@ -1,7 +1,16 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+)
 
 func main() {
-	fmt.Printf("hello")
+	args := os.Args[1:]
+	for _, arg := range args {
+		if _, _, err := Parse(arg); err != nil {
+			fmt.Printf("%v\n", err)
+			return
+		}
+	}
 }
