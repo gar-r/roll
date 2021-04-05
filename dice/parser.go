@@ -7,7 +7,7 @@ import (
 	"strconv"
 )
 
-var diceRe = regexp.MustCompile(`^(\d*)d(100|20|12|10|8|6|4)(?:[\+|\-](\d+))?$`)
+var diceRe = regexp.MustCompile(`^(\d*)d(100|20|12|10|8|6|4)([\+|\-]\d+)?$`)
 
 func parseDice(def string) (count, sides, mod int, err error) {
 	match := diceRe.FindStringSubmatch(def)

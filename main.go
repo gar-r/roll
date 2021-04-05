@@ -33,7 +33,11 @@ func generateRolls(args []string) ([]int, error) {
 		if d, err := dice.Parse(s); err != nil {
 			return nil, err
 		} else {
-			rolls = append(rolls, d.Roll(r))
+			roll := d.Roll(r)
+			if roll < 0 && !negFlag {
+				roll = 0
+			}
+			rolls = append(rolls, roll)
 		}
 	}
 	return rolls, nil

@@ -3,8 +3,8 @@ package dice
 import "math/rand"
 
 type Dice struct {
-	count int
-	sides int
+	count    int
+	sides    int
 	modifier int
 }
 
@@ -13,14 +13,15 @@ func Parse(def string) (*Dice, error) {
 	if err != nil {
 		return nil, err
 	}
-	return &Dice { count, sides, modifier }, nil
+	return &Dice{count, sides, modifier}, nil
 }
 
 func (d *Dice) Roll(r *rand.Rand) int {
 	sum := 0
-	for i:=0; i<d.count; i++ {
+	for i := 0; i < d.count; i++ {
 		sum += d.rollOne(r)
 	}
+	sum += d.modifier
 	return sum
 }
 

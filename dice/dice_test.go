@@ -31,6 +31,11 @@ func Test_Dice_Roll(t *testing.T) {
 		assertRoll(t, &Dice {5, 10, 0}, 30)
 	})
 
+	t.Run("rolls with modifiers", func(t *testing.T) {
+		assertRoll(t, &Dice {1, 6, 10}, 16)
+		assertRoll(t, &Dice {1, 6, -5}, 1)
+	})
+
 	t.Run("edge cases", func(t *testing.T) {
 		assertRoll(t, &Dice {0, 4, 0}, 0)
 		assertRoll(t, &Dice {0, 6, 0}, 0)
