@@ -8,11 +8,32 @@ import (
 func Test_Roll(t *testing.T) {
 
 	t.Run("d4 tests", func(t *testing.T) {
-		assertRoll(t, 1, 4, 3)
-		assertRoll(t, 2, 4, 4)
+		assertRoll(t, 1, 4, 2)
+		assertRoll(t, 2, 4, 6)
+		assertRoll(t, 3, 4, 10)
+		assertRoll(t, 4, 4, 14)
+		assertRoll(t, 5, 4, 16)
+	})
+
+	t.Run("d6 tests", func(t *testing.T) {
+		assertRoll(t, 1, 6, 6)
+		assertRoll(t, 2, 6, 10)
+		assertRoll(t, 3, 6, 16)
+		assertRoll(t, 4, 6, 22)
+		assertRoll(t, 5, 6, 24)
+	})
+
+	t.Run("d10 tests", func(t *testing.T) {
+		assertRoll(t, 1, 10, 2)
+		assertRoll(t, 2, 10, 10)
+		assertRoll(t, 3, 10, 18)
+		assertRoll(t, 4, 10, 28)
+		assertRoll(t, 5, 10, 30)
 	})
 
 	t.Run("edge cases", func(t *testing.T) {
+		assertRoll(t, 0, 4, 0)
+		assertRoll(t, 0, 6, 0)
 	})
 }
 
