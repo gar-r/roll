@@ -4,5 +4,5 @@ build:
 clean:
 	rm -f roll
 
-install:
+install: build
 	mv roll /usr/local/bin
