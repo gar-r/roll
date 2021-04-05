@@ -4,9 +4,12 @@ import (
 	"flag"
 	"math/rand"
 	"time"
+
+	"okki.hu/roll/dice"
 )
 
 var sumFlag bool
+var negFlag bool
 
 var r = rand.New(rand.NewSource(time.Now().UnixNano()))
 
@@ -27,10 +30,10 @@ func main() {
 func generateRolls(args []string) ([]int, error) {
 	rolls := make([]int, 0)
 	for _, s := range args {
-		if count, sides, err := Parse(s); err != nil {
+		if d, err := dice.Parse(s); err != nil {
 			return nil, err
 		} else {
-			rolls = append(rolls, Roll(r, count, sides))
+			rolls = append(rolls, d.Roll(r))
 		}
 	}
 	return rolls, nil
