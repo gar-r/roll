@@ -48,6 +48,7 @@ func Test_Dice_Parse(t *testing.T) {
 		"", "1d", "1dx", "xd4",	// non-numbers
 		"foo", 					// no "d"
 		"2d3", "3d7", "4d11",	// no such die
+		"1d14", "1d16", "1d18", // could be legal, but not
 	}
 
 	for _, test := range invalid {
