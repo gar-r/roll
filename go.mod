@@ -1,3 +1,3 @@
-module okki.hu/roll
+module roll
 
 go 1.16

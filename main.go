@@ -5,7 +5,7 @@ import (
 	"math/rand"
 	"time"
 
-	"okki.hu/roll/dice"
+	"roll/dice"
 )
 
 var sumFlag bool
