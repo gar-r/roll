@@ -1,3 +1,18 @@
+- [roll - dice rolling from the command line](#roll---dice-rolling-from-the-command-line)
+	- [About](#about)
+	- [Build and Install](#build-and-install)
+		- [Makefile](#makefile)
+		- [Building with Go](#building-with-go)
+	- [Example usage](#example-usage)
+		- [Roll a single die](#roll-a-single-die)
+		- [Rolling multiple different dice](#rolling-multiple-different-dice)
+		- [Using modifiers](#using-modifiers)
+		- [Summing up multiple dice rolls](#summing-up-multiple-dice-rolls)
+		- [Print usage](#print-usage)
+	- [Library usage](#library-usage)
+	- [License](#license)
+
+
 # roll - dice rolling from the command line
 
 ## About
@@ -123,6 +138,34 @@ Examples:
 Flags:
   -n	allow rolls to go below 0 when using negative modifiers
   -s	print a single line summing up all dice
+```
+
+
+## Library usage
+
+
+Add to your project:
+
+```
+go get git.okki.hu/garric/roll
+```
+
+Usage:
+
+```go
+package main
+
+import (
+	"fmt"
+
+	"git.okki.hu/garric/roll/dice"
+)
+
+func main() {
+	fmt.Printf("1d6:    %d\n", dice.D6.Roll())
+	fmt.Printf("3d10:   %d\n", dice.D10.RollMany(3))
+	fmt.Printf("2d20+1: %d\n", dice.D20.RollSpecial(2, 1))
+}
 ```
 
 ## License
