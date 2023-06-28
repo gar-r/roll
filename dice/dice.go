@@ -1,30 +1,26 @@
 package dice
 
-import "math/rand"
+// Dice represents a single game dice
+type Dice uint
 
-type Dice struct {
-	count    int
-	sides    int
-	modifier int
-}
+const (
+	D4   Dice = 4
+	D6   Dice = 6
+	D8   Dice = 8
+	D10  Dice = 10
+	D12  Dice = 12
+	D20  Dice = 20
+	D100 Dice = 100
+)
 
-func Parse(def string) (*Dice, error) {
-	count, sides, modifier, err := parseDice(def)
-	if err != nil {
-		return nil, err
+func SupportedDice() map[int]Dice {
+	return map[int]Dice{
+		int(D4):   D4,
+		int(D6):   D6,
+		int(D8):   D8,
+		int(D10):  D10,
+		int(D12):  D12,
+		int(D20):  D20,
+		int(D100): D100,
 	}
-	return &Dice{count, sides, modifier}, nil
-}
-
-func (d *Dice) Roll(r *rand.Rand) int {
-	sum := 0
-	for i := 0; i < d.count; i++ {
-		sum += d.rollOne(r)
-	}
-	sum += d.modifier
-	return sum
-}
-
-func (d *Dice) rollOne(r *rand.Rand) int {
-	return r.Intn(d.sides) + 1
 }

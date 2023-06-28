@@ -7,9 +7,9 @@ import (
 	"strconv"
 )
 
-var diceRe = regexp.MustCompile(`^(\d*)d(100|20|12|10|8|6|4)([\+|\-]\d+)?$`)
+var diceRe = regexp.MustCompile(`^(\d*)[D|d](100|20|12|10|8|6|4)([+|\-]\d+)?$`)
 
-func parseDice(def string) (count, sides, mod int, err error) {
+func parse(def string) (count, sides, mod int, err error) {
 	match := diceRe.FindStringSubmatch(def)
 	if match == nil || len(match) == 0 {
 		err = newError(def)
@@ -26,7 +26,7 @@ func parseCount(s, def string) (count int, err error) {
 		count = 1
 		return
 	}
-    if count, err = strconv.Atoi(s); err != nil {
+	if count, err = strconv.Atoi(s); err != nil {
 		err = newError(def)
 	}
 	return
@@ -51,5 +51,5 @@ func parseModifier(s, def string) (mod int, err error) {
 }
 
 func newError(def string) error {
-	return errors.New(fmt.Sprintf("cannot understand '%s'", def))
+	return errors.New(fmt.Sprintf("cannot parse dice definition: '%s'", def))
 }

@@ -2,16 +2,11 @@ package main
 
 import (
 	"flag"
-	"math/rand"
-	"time"
-
-	"roll/dice"
+	"git.okki.hu/garric/roll/dice"
 )
 
 var sumFlag bool
 var negFlag bool
-
-var r = rand.New(rand.NewSource(time.Now().UnixNano()))
 
 func main() {
 	initFlags()
@@ -30,15 +25,14 @@ func main() {
 func generateRolls(args []string) ([]int, error) {
 	rolls := make([]int, 0)
 	for _, s := range args {
-		if d, err := dice.Parse(s); err != nil {
+		roll, err := dice.Roll(s)
+		if err != nil {
 			return nil, err
-		} else {
-			roll := d.Roll(r)
-			if roll < 0 && !negFlag {
-				roll = 0
-			}
-			rolls = append(rolls, roll)
 		}
+		if roll < 0 && !negFlag {
+			roll = 0
+		}
+		rolls = append(rolls, roll)
 	}
 	return rolls, nil
 }
