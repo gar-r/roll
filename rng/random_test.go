@@ -14,7 +14,6 @@ func TestNewPseudoRandom(t *testing.T) {
 }
 
 func TestPseudoRandom_Intn(t *testing.T) {
-
 	// mock provider fn with fixed seed
 	randProviderFn = func() *rand.Rand {
 		return rand.New(rand.NewSource(0))
@@ -30,11 +29,19 @@ func TestPseudoRandom_Intn(t *testing.T) {
 	t.Run("generate numbers in interval", func(t *testing.T) {
 		rng := NewPseudoRandom()
 		assertIntSequence(t,
-			[]int{2, -1, -3, -6, 4, -9, 9, 4, -7, 5},
+			[]int{4, 4, 3, -4, 5, 6, -3, 7, -2, -2},
 			func() int { return rng.Intn(-10, 10) },
 		)
 	})
 
+	t.Run("lower/upper bound honored (probably)", func(t *testing.T) {
+		rng := NewPseudoRandom()
+		for i := 0; i < 100000; i++ {
+			r := rng.Intn(1, 5)
+			assert.GreaterOrEqual(t, r, 1)
+			assert.Less(t, r, 5)
+		}
+	})
 }
 
 func assertIntSequence(t *testing.T, expected []int, rngFn func() int) {

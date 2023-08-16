@@ -2,10 +2,12 @@ package dice
 
 import (
 	"fmt"
-	"git.okki.hu/garric/roll/rng"
+	"testing"
+
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
-	"testing"
+
+	"git.okki.hu/garric/roll/rng"
 )
 
 func TestDice_Roll(t *testing.T) {
@@ -60,6 +62,6 @@ type mockRandomProvider struct {
 }
 
 func (m *mockRandomProvider) Intn(lower, upper int) int {
-	call := m.Mock.Called(lower, upper)
+	call := m.Called(lower, upper)
 	return call.Int(0)
 }

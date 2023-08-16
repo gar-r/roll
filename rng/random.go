@@ -39,7 +39,7 @@ func (p *PseudoRandom) Intn(lower, upper int) int {
 	if upper < lower {
 		panic(errInvalidBounds)
 	}
-	return p.r.Intn(upper-lower+1) + lower
+	return p.r.Intn(upper-lower) + lower
 }
 
 func newRand() *rand.Rand {
