@@ -6,3 +6,6 @@ clean:
 
 install: build
 	mv roll /usr/local/bin
+
+uninstall:
+	rm -rf /usr/local/bin/roll
