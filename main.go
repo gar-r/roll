@@ -2,11 +2,14 @@ package main
 
 import (
 	"flag"
+
 	"git.okki.hu/garric/roll/dice"
 )
 
-var sumFlag bool
-var negFlag bool
+var (
+	sumFlag bool
+	negFlag bool
+)
 
 func main() {
 	initFlags()
@@ -19,7 +22,6 @@ func main() {
 			printRolls(rolls)
 		}
 	}
-	return
 }
 
 func generateRolls(args []string) ([]int, error) {
