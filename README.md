@@ -147,7 +147,7 @@ Flags:
 Add to your project:
 
 ```
-go get git.okki.hu/garric/roll
+go get github.com/gar-r/roll
 ```
 
 Usage:
@@ -158,7 +158,7 @@ package main
 import (
 	"fmt"
 
-	"git.okki.hu/garric/roll/dice"
+	"github.com/gar-r/roll/dice"
 )
 
 func main() {

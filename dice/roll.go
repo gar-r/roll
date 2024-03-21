@@ -2,7 +2,7 @@ package dice
 
 import (
 	"fmt"
-	"git.okki.hu/garric/roll/rng"
+	"github.com/gar-r/roll/rng"
 )
 
 // Roll the Dice and return the result.

@@ -7,7 +7,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 
-	"git.okki.hu/garric/roll/rng"
+	"github.com/gar-r/roll/rng"
 )
 
 func TestDice_Roll(t *testing.T) {

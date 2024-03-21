@@ -1,4 +1,4 @@
-module git.okki.hu/garric/roll
+module github.com/gar-r/roll
 
 go 1.20
 

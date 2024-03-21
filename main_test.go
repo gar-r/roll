@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"git.okki.hu/garric/roll/rng"
+	"github.com/gar-r/roll/rng"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )

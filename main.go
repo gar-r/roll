@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 
-	"git.okki.hu/garric/roll/dice"
+	"github.com/gar-r/roll/dice"
 )
 
 var (
